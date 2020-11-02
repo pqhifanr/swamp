@@ -493,7 +493,7 @@ public class WebSocket : NSObject, StreamDelegate {
             guard canDispatch else {return}
             callbackQueue.async { [weak self] in
                 guard let s = self else { return }
-                s.onConnect?()
+                s.onConnect?(())
                 s.delegate?.websocketDidConnect(socket: s)
                 s.notificationCenter.post(name: NSNotification.Name(WebsocketDidConnectNotification), object: self)
             }
