@@ -55,7 +55,9 @@ open class WebSocketSwampTransport: SwampTransport, WebSocketDelegate {
     fileprivate var disconnectionReason: String?
     
     public init(wsEndpoint: URL){
-        self.socket = WebSocket(request: URLRequest(url: wsEndpoint))
+        var request = URLRequest(url: wsEndpoint)
+        request.addValue("wamp.2.json", forHTTPHeaderField: "Sec-WebSocket-Protocol")
+        self.socket = WebSocket(request: request)
         self.mode = .text
         socket.delegate = self
     }
